@@ -1,0 +1,47 @@
+<p>buscador works!</p>
+
+<h2>Buscar por país</h2>
+
+
+<form   (ngSubmit)="buscar()"  
+        autocomplete="off">
+
+    <input  [(ngModel)]="valor"
+            name="valor"
+            type="text" >
+</form>
+
+<br>
+
+<!-- *ngIf="paisesMostrar.length > 0" -->
+
+<div class="row" >
+    <div class="col">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Bandera</td>
+                    <td>Nombre</td>
+                    <td>Poblacion</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody #datosPaises>
+                <tr *ngFor="let pais of paisesMostrar; let i = index">
+                    <td #id>{{i + 1}}</td>
+                    <td>
+                        <img src="{{pais.flags.png}}" class="small-flag" alt="">
+                    </td>
+                    <td #nombrePais>{{pais.name.common}}</td>
+                    <td #poblacion>{{pais.population | number}}</td>
+                    <td>
+                        <a href="#" name="{{pais.name.common}}" (click)="agregarFavoritos($event)">❤</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button (click)="agregarFavoritos($event)">Favoritos</button>
+
